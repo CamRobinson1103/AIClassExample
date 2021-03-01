@@ -4,6 +4,6 @@
 MathLibrary::Vector2 SeekBehavior::calculateForce(Agent* agent)
 {
 	//Do seek behavior
-	MathLibrary::Vector2 direction = MathLibrary::Vector2::normalize(m_target->getWorldPosition()) - (agent->getWorldPosition());
+	MathLibrary::Vector2 direction = MathLibrary::Vector2::normalize(m_target->getWorldPosition() - agent->getWorldPosition());
 	return MathLibrary::Vector2();
 }
