@@ -8,7 +8,6 @@ class Agent : public Actor
 {
 public:
 	Agent();
-   ~Agent();
     /// <param name="x">Position on the x axis</param>
     /// <param name="y">Position on the y axis</param>
     /// <param name="icon">The symbol that will appear when drawn</param>
@@ -32,6 +31,7 @@ public:
 
     //Add the given force to the total force that is being applied to the agent
     void addForce(MathLibrary::Vector2 force);
+    void addBehavior(Behavior* behavior);
 
 private:
 	MathLibrary::Vector2 m_force;
