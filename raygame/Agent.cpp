@@ -7,11 +7,6 @@ Agent::Agent() : Actor()
 	m_maxForce = 1;
 }
 
-Actor::~Actor()
-{
-
-}
-
 Agent::Agent(float x, float y, float collisionRadius, char icon, float maxSpeed, float maxForce) :
 	Actor(x,y, collisionRadius, icon, maxSpeed)
 {

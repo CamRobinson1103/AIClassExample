@@ -5,6 +5,5 @@
 class SteeringBehavior : public Behavior
 {
 public:
-	virtual MathLibrary::Vector2 calculateForce(Agent* AGENT) = 0;
-
+	virtual MathLibrary::Vector2 calculateForce(Agent* Agent) = 0;
 };
