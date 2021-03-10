@@ -8,10 +8,10 @@ FleeBehavior::FleeBehavior()
 	m_fleeForce = -1;
 }
 
-FleeBehavior::FleeBehavior(Actor* target, float seekForce)
+FleeBehavior::FleeBehavior(Actor* target, float fleeForce)
 {
 	m_target = target;
-	m_fleeForce = seekForce;
+	m_fleeForce = fleeForce;
 }
 
 MathLibrary::Vector2 FleeBehavior::calculateForce(Agent* agent)

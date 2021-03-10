@@ -16,9 +16,8 @@ public:
 	void update(Agent* agent, float deltaTime) override;
 
 private:
-	//The agent the behavior is seeking
+	//The agent the behaviour is seeking
 	Actor* m_target;
-	float m_seekForce;
-	
 };
+
 

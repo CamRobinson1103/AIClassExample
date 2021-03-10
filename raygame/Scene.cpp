@@ -3,7 +3,7 @@
 Scene::Scene()
 {
     m_actorCount = 0;
-    m_actors = new Actor*[0];
+    m_actors = new Actor * [0];
     m_world = new MathLibrary::Matrix3();
 }
 
@@ -166,5 +166,5 @@ void Scene::end()
 
 void Scene::destroy(Actor* actor)
 {
-    
+
 }

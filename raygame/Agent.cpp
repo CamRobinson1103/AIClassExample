@@ -8,7 +8,7 @@ Agent::Agent() : Actor()
 }
 
 Agent::Agent(float x, float y, float collisionRadius, char icon, float maxSpeed, float maxForce) :
-	Actor(x,y, collisionRadius, icon, maxSpeed)
+	Actor(x, y, collisionRadius, icon, maxSpeed)
 {
 	m_force = { 0, 0 };
 	m_maxForce = maxForce;
@@ -21,25 +21,6 @@ Agent::Agent(float x, float y, float collisionRadius, Sprite* sprite, float maxS
 	m_maxForce = maxForce;
 }
 
-void Agent::update(float deltaTime)
-{
-	//Reset force to be 0
-	m_force = { 0,0 };
-
-	for (int i = 0; i < m_behaviors.size(); i++)
-	{
-		m_behaviors[i]->update(this, deltaTime);
-	}
-		
-	//Updates velocity with the new force
-	setVelocity(getVelocity() + m_force * deltaTime);
-
-	updateFacing();
-
-	Actor::update(deltaTime);
-}
-
-
 Agent::Agent(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed, float maxForce) :
 	Actor(x, y, collisionRadius, spriteFilePath, maxSpeed)
 {
@@ -47,21 +28,36 @@ Agent::Agent(float x, float y, float collisionRadius, const char* spriteFilePath
 	m_maxForce = maxForce;
 }
 
-void Agent::addForce(MathLibrary::Vector2 force)
+void Agent::update(float deltatime)
 {
-	//Add the force give to the total force
-	m_force = m_force + force;
+	//Reset force to be zero
+	m_force = { 0,0 };
 
-	// If the total force is greater than the max force, set its magnitude to be the max force
-	if (m_force.getMagnitude() > getMaxForce())
-	{
-		m_force = m_force.getNormalized() * getMaxForce();
-	}
+	//Call update for each behaviour in the list
+	for (int i = 0; i < m_behaviours.size(); i++)
+		m_behaviours[i]->update(this, deltatime);
+
+	//Updates velocity with the new force
+	setVelocity(getVelocity() + m_force * deltatime);
+
+	//Rotates the agent to face the direction its moving in
+	updateFacing();
+
+	Actor::update(deltatime);
 }
 
-void Agent::addBehavior(Behavior* behavior)
+void Agent::addForce(MathLibrary::Vector2 force)
 {
-	if (behavior)
-		m_behaviors.push_back(behavior);
-	
+	//Add the force given to the total force
+	m_force = m_force + force;
+
+	//If the total force is greater than the max force, set its magnitude to be the max force
+	if (m_force.getMagnitude() > getMaxForce())
+		m_force = m_force.getNormalized() * getMaxForce();
+}
+
+void Agent::addBehaviour(Behaviour* behaviour)
+{
+	if (behaviour)
+		m_behaviours.push_back(behaviour);
 }

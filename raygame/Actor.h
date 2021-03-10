@@ -113,4 +113,3 @@ private:
     int m_childCount;
     Sprite* m_sprite;
 };
-

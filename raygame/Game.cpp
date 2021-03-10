@@ -1,14 +1,14 @@
 #include "Game.h"
 #include "raylib.h"
 #include "Player.h"
-#include "Agent.h"
 #include "SeekBehavior.h"
 
 bool Game::m_gameOver = false;
 Scene** Game::m_scenes = new Scene*;
 int Game::m_sceneCount = 0;
 int Game::m_currentSceneIndex = 0;
-
+int Game::m_screenWidth = 1024;
+int Game::m_screenHeight = 720;
 
 Game::Game()
 {
@@ -21,23 +21,23 @@ Game::Game()
 
 void Game::start()
 {
-	int screenWidth = 1024;
-	int screenHeight = 760;
+	m_screenWidth = 1024;
+	m_screenHeight = 760;
 
-	InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
-	m_camera->offset = { (float)screenWidth / 2, (float)screenHeight / 2 };
-	m_camera->target = { (float)screenWidth / 2, (float)screenHeight / 2 };
+	InitWindow(m_screenWidth, m_screenHeight, "raylib [core] example - basic window");
+	m_camera->offset = { (float)m_screenWidth / 2, (float)m_screenHeight / 2 };
+	m_camera->target = { (float)m_screenWidth / 2, (float)m_screenHeight / 2 };
 	m_camera->zoom = 1;
 
-
+	//Initialize agents
 	Player* player = new Player(10, 10, 5, "Images/player.png", 1, 10);
 	Agent* enemy = new Agent(20, 20, 1, "Images/enemy.png", 10, 10);
 
-	//Creates a new steering behavior and adds it to the enemy
-	SeekBehavior* seek = new SeekBehavior(player);
+	//Create a new steering behaviour and adds it to the enemy 
+	SeekBehavior* seek = new SeekBehavior(player, 10);
 	enemy->addBehavior(seek);
 
-	//Initializes scene
+	//Initialize the scene
 	Scene* scene = new Scene();
 	scene->addActor(player);
 	scene->addActor(enemy);
@@ -118,7 +118,7 @@ int Game::addScene(Scene* scene)
 		return -1;
 
 	//Create a new temporary array that one size larger than the original
-	Scene** tempArray = new Scene*[m_sceneCount + 1];
+	Scene** tempArray = new Scene * [m_sceneCount + 1];
 
 	//Copy values from old array into new array
 	for (int i = 0; i < m_sceneCount; i++)
@@ -148,7 +148,7 @@ bool Game::removeScene(Scene* scene)
 	bool sceneRemoved = false;
 
 	//Create a new temporary array that is one less than our original array
-	Scene** tempArray = new Scene*[m_sceneCount - 1];
+	Scene** tempArray = new Scene * [m_sceneCount - 1];
 
 	//Copy all scenes except the scene we don't want into the new array
 	int j = 0;
@@ -171,7 +171,7 @@ bool Game::removeScene(Scene* scene)
 		m_scenes = tempArray;
 		m_sceneCount--;
 	}
-		
+
 
 	return sceneRemoved;
 }
@@ -213,3 +213,4 @@ void Game::setGameOver(bool value)
 {
 	Game::m_gameOver = value;
 }
+
