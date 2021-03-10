@@ -4,6 +4,10 @@
 bool SimpleEnemy::checkTargetInSight()
 {
 	//Check if target is null. If so return false
+	if (setTarget == NULL)
+	{
+		return false;
+	}
 
 	//Find the direction vector that represents where the target is relative to the enemy
 
@@ -35,7 +39,7 @@ void SimpleEnemy::start()
 	m_currentState = WANDER;
 
 	//Initialize member variables
-	m_seek = getBehaviour<SeekBehaviour>();
+	m_seek = getBehavior<SeekBehaviour>();
 	//m_wander = getBehaviour<WanderBehaviour>();
 
 	//Set the target to be the base class target
@@ -61,3 +65,5 @@ void SimpleEnemy::setTarget(Actor* target)
 	Enemy::setTarget(target);
 	m_seek->setTarget(target);
 }
+//these bois cappin, factuals
+

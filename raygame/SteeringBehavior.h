@@ -12,3 +12,4 @@ public:
 private:
 	float m_forceScale = 1;
 };
+
