@@ -22,7 +22,7 @@ Game::Game()
 	m_currentSceneIndex = 0;
 	m_sceneCount = 0;
 }
-//Sayonara BRING THE PAIN ON YEAH
+
 void Game::start()
 {
 	m_screenWidth = 1024;
