@@ -6,7 +6,6 @@ Agent::Agent() : Actor()
 	m_force = { 0, 0 };
 	m_maxForce = 1;
 }
-
 Agent::Agent(float x, float y, float collisionRadius, char icon, float maxSpeed, float maxForce) :
 	Actor(x, y, collisionRadius, icon, maxSpeed)
 {
@@ -27,13 +26,13 @@ Agent::Agent(float x, float y, float collisionRadius, const char* spriteFilePath
 	m_force = { 0, 0 };
 	m_maxForce = maxForce;
 }
-
+//
 void Agent::update(float deltatime)
 {
 	//Reset force to be zero
 	m_force = { 0,0 };
 
-	//Call update for each behaviour in the list
+	//Call update for each behavior in the list
 	for (int i = 0; i < m_behaviors.size(); i++)
 	{
 		if (m_behaviors[i]->getEnabled())
@@ -61,7 +60,6 @@ void Agent::addForce(MathLibrary::Vector2 force)
 	if (m_force.getMagnitude() > getMaxForce())
 		m_force = m_force.getNormalized() * getMaxForce();
 }
-
 void Agent::addBehavior(Behavior* behavior)
 {
 	if (behavior)

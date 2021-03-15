@@ -9,9 +9,9 @@ void ComplexEnemy::start()
 	Enemy::start();
 
 	//Initializa behaviors
-	m_wanderBavavior = getBehavior<WanderBehavior>();
-	m_pursueBavavior = getBehavior<PursueBehavior>();
-	m_evadeBavavior = getBehavior<EvadeBehavior>();
+	m_wanderBehavior = getBehavior<WanderBehavior>();
+	m_pursueBehavior = getBehavior<PursueBehavior>();
+	m_evadeBehavior = getBehavior<EvadeBehavior>();
 
 
 	//Set target to target given from base class
@@ -41,4 +41,14 @@ void ComplexEnemy::onCollision(Actor* other)
 			setTarget(nullptr);
 		}
 	}
+}
+
+bool ComplexEnemy::checkTargetInSight(float angle)
+{
+	return false;
+}
+
+bool ComplexEnemy::checkTargetInRange(float range)
+{
+	return false;
 }

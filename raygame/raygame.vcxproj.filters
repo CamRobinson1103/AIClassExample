@@ -62,9 +62,6 @@
     <ClCompile Include="ABDecision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ComplexEnemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DecisionBehavior.cpp">
       <Filter>AI</Filter>
     </ClCompile>
@@ -76,6 +73,9 @@
     </ClCompile>
     <ClCompile Include="PursueDecision.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComplexEnemy.cpp">
+      <Filter>AI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -130,9 +130,6 @@
     <ClInclude Include="ABDecision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ComplexEnemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DecisionBehavior.h">
       <Filter>AI</Filter>
     </ClInclude>
@@ -144,6 +141,9 @@
     </ClInclude>
     <ClInclude Include="PursueDecision.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComplexEnemy.h">
+      <Filter>AI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,7 @@
 #include "Actor.h"
 #include <vector>
 
-class Behaviour;
+class Behavior;
 
 class Agent : public Actor
 {
@@ -33,14 +33,14 @@ public:
 
     //Add the given force to the total force that is being applied to the agent.
     void addForce(MathLibrary::Vector2 force);
-    void addBehaviour(Behaviour* behaviour);
+    void addBehavior(Behavior* behavior);
 
     ///<summary>
     /// Returns the first behaviour that matches the given type.
     /// If no behaviour matches the type, returns null.
     ///</summary>
-    template<typename BehaviourType>
-    BehaviourType* getBehavior();
+    template<typename BehaviorType>
+    BehaviorType* getBehavior();
 
 
 private:
@@ -49,10 +49,10 @@ private:
     std::vector<Behavior*> m_behaviors;
 };
 
-template<typename BehaviourType>
-inline BehaviourType* Agent::getBehavior()
+template<typename BehaviorType>
+inline BehaviorType* Agent::getBehavior()
 {
-    //Iterate through the list of behaviours
+    //Iterate through the list of behaviors
     for (int i = 0; i < m_behaviors.size(); i++)
     {
         //Attempt to cast behaviour at the current index as the given type
