@@ -40,27 +40,27 @@ public:
     /// If no behaviour matches the type, returns null.
     ///</summary>
     template<typename BehaviourType>
-    BehaviourType* getBehaviour();
+    BehaviourType* getBehavior();
 
 
 private:
     MathLibrary::Vector2 m_force;
     float m_maxForce;
-    std::vector<Behaviour*> m_behaviours;
+    std::vector<Behavior*> m_behaviors;
 };
 
 template<typename BehaviourType>
-inline BehaviourType* Agent::getBehaviour()
+inline BehaviourType* Agent::getBehavior()
 {
     //Iterate through the list of behaviours
-    for (int i = 0; i < m_behaviours.size(); i++)
+    for (int i = 0; i < m_behaviors.size(); i++)
     {
         //Attempt to cast behaviour at the current index as the given type
-        BehaviourType* behaviour = dynamic_cast<BehaviourType*>(m_behaviours[i]);
+        BehaviorType* behavior = dynamic_cast<BehaviourType*>(m_behaviors[i]);
 
         //If the cast is successful return the behaviour that was found
-        if (behaviour)
-            return behaviour;
+        if (behavior)
+            return behavior;
     }
 
     //If no behaviours were found to match the type, return nullptr

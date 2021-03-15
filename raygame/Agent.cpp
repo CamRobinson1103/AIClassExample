@@ -34,8 +34,14 @@ void Agent::update(float deltatime)
 	m_force = { 0,0 };
 
 	//Call update for each behaviour in the list
-	for (int i = 0; i < m_behaviours.size(); i++)
-		m_behaviours[i]->update(this, deltatime);
+	for (int i = 0; i < m_behaviors.size(); i++)
+	{
+		if (m_behaviors[i]->getEnabled())
+		{
+			m_behaviors[i]->update(this, deltatime);
+		}
+	}
+		
 
 	//Updates velocity with the new force
 	setVelocity(getVelocity() + m_force * deltatime);
@@ -56,8 +62,8 @@ void Agent::addForce(MathLibrary::Vector2 force)
 		m_force = m_force.getNormalized() * getMaxForce();
 }
 
-void Agent::addBehaviour(Behaviour* behaviour)
+void Agent::addBehavior(Behavior* behavior)
 {
-	if (behaviour)
-		m_behaviours.push_back(behaviour);
+	if (behavior)
+		m_behaviors.push_back(behavior);
 }

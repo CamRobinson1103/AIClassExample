@@ -2,6 +2,10 @@
 #include "raylib.h"
 #include "Player.h"
 #include "SeekBehavior.h"
+#include "DecisionBehavior.h"
+#include "ABDecision.h"
+#include "ComplexEnemy.h"
+#include "PursueDecision.h"
 
 bool Game::m_gameOver = false;
 Scene** Game::m_scenes = new Scene*;
@@ -18,7 +22,7 @@ Game::Game()
 	m_currentSceneIndex = 0;
 	m_sceneCount = 0;
 }
-
+//Sayonara BRING THE PAIN ON YEAH
 void Game::start()
 {
 	m_screenWidth = 1024;
@@ -32,10 +36,15 @@ void Game::start()
 	//Initialize agents
 	Player* player = new Player(10, 10, 5, "Images/player.png", 1, 10);
 	Agent* enemy = new Agent(20, 20, 1, "Images/enemy.png", 10, 10);
+	ComplexEnemy* complexEnemy = new ComplexEnemy(20, 20, 1, "Images/enemy.png", player );
+	PursueDecision* pursueDecision = new PursueDecision();
+	DecisionBehavior* decisionBehavior = new DecisionBehavior(pursueDecision);
+
+	complexEnemy->addBehaviour(decisionBehavior);
 
 	//Create a new steering behaviour and adds it to the enemy 
 	SeekBehavior* seek = new SeekBehavior(player, 10);
-	enemy->addBehavior(seek);
+	enemy->addBehaviour(seek);
 
 	//Initialize the scene
 	Scene* scene = new Scene();
