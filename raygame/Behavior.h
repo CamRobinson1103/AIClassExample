@@ -1,14 +1,15 @@
 #pragma once
 class Agent;
 
+// Abstract class for all behaviours
 class Behavior
 {
 public:
-	virtual void update(Agent* owner, float deltaTime) = 0;
-	virtual void draw(Agent* agent) {};
+	virtual void update(Agent* agent, float deltaTime) = 0;
+
 	bool getEnabled() { return m_enabled; }
-	bool setEnabled(bool enabled) { m_enabled = enabled; }
+	void setEnabled(bool enabled) { m_enabled = enabled; }
 
 private:
-	bool m_behavior = true;
+	bool m_enabled = true;
 };

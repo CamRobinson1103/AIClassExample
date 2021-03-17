@@ -8,17 +8,14 @@ void ComplexEnemy::start()
 {
 	Enemy::start();
 
-	//Initializa behaviors
+	// Init behaviors
 	m_wanderBehavior = getBehavior<WanderBehavior>();
 	m_pursueBehavior = getBehavior<PursueBehavior>();
 	m_evadeBehavior = getBehavior<EvadeBehavior>();
 
-
-	//Set target to target given from base class
 	setTarget(Enemy::getTarget());
-
 }
-
+// Set target to target given from the base class
 void ComplexEnemy::setTarget(Actor* target)
 {
 	Enemy::setTarget(target);
@@ -30,25 +27,42 @@ void ComplexEnemy::onCollision(Actor* other)
 {
 	Enemy::onCollision(other);
 
-
+	// If the actor is a player, damage it
 	Player* player = dynamic_cast<Player*>(other);
+	if (!player)
+		return;
 
-	if (player)
+	player->takeDamage(getDamage());
+
+	// If the target has died, set the target to null
+	if (player->getHealth() <= 0)
 	{
-		player->takeDamage(getDamage());
-		if (player->getHealth() <= 0)
-		{
-			setTarget(nullptr);
-		}
+		setTarget(nullptr);
 	}
 }
 
 bool ComplexEnemy::checkTargetInSight(float angle)
 {
-	return false;
+	// Ensure target is not null
+	if (!getTarget())
+		return false;
+
+	// Get direction to target
+	MathLibrary::Vector2 directionToTarget = (getTarget()->getWorldPosition() - getWorldPosition()).getNormalized();
+
+	// Get dotproduct of this enemy's forward vector and the direction
+	float dotProduct = MathLibrary::Vector2::dotProduct(getForward(), directionToTarget);
+
+	// Return whether or not the target is within the viewing angle
+	return acos(dotProduct) < angle;
 }
 
 bool ComplexEnemy::checkTargetInRange(float range)
 {
-	return false;
+	// Return false if target is null
+	if (!getTarget())
+		return false;
+
+	// Return whether or not target is within range
+	return (getTarget()->getWorldPosition() - getWorldPosition()).getMagnitude() < range;
 }

@@ -93,6 +93,7 @@ private:
     /// transforms. Updates the transforms for all children of this actor
     /// </summary>
     void updateGlobalTransform();
+
 protected:
     MathLibrary::Matrix3* m_globalTransform;
     MathLibrary::Matrix3* m_localTransform;

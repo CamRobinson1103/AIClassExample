@@ -4,7 +4,6 @@
 #include "raylib.h"
 #include "Sprite.h"
 
-
 Actor::Actor()
 {
     m_globalTransform = new MathLibrary::Matrix3();
@@ -41,7 +40,7 @@ Actor::Actor(float x, float y, float collisionRadius, char icon = ' ', float max
     m_scale = new MathLibrary::Matrix3();
 
     m_icon = icon;
-    setLocalPosition(MathLibrary::Vector2(x,y));
+    setLocalPosition(MathLibrary::Vector2(x, y));
     m_velocity = MathLibrary::Vector2();
     m_collisionRadius = collisionRadius;
     m_childCount = 0;
@@ -108,7 +107,7 @@ void Actor::setVelocity(MathLibrary::Vector2 value)
 
 MathLibrary::Vector2 Actor::getAcceleration()
 {
-	return m_acceleration;
+    return m_acceleration;
 }
 
 void Actor::setAcceleration(MathLibrary::Vector2 value)
@@ -124,7 +123,7 @@ void Actor::start()
 void Actor::addChild(Actor* child)
 {
     //Create a new array with a size one greater than our old array
-    Actor** appendedArray = new Actor*[m_childCount + 1];
+    Actor** appendedArray = new Actor * [m_childCount + 1];
     //Copy the values from the old array to the new array
     for (int i = 0; i < m_childCount; i++)
     {
@@ -239,7 +238,7 @@ void Actor::lookAt(MathLibrary::Vector2 position)
 {
     //Find the direction that the actor should look in
     MathLibrary::Vector2 direction = (position - getWorldPosition()).getNormalized();
-    
+
     //Use the dotproduct to find the angle the actor needs to rotate
     float dotProd = MathLibrary::Vector2::dotProduct(getForward(), direction);
     if (abs(dotProd) > 1)

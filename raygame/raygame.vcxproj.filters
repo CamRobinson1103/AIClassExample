@@ -71,11 +71,26 @@
     <ClCompile Include="PursueBehavior.cpp">
       <Filter>AI</Filter>
     </ClCompile>
-    <ClCompile Include="PursueDecision.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ComplexEnemy.cpp">
       <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="EvasionDecision.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="ArrivalBehavior.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="PursueDecision.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthLowDecision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SeePlayerDecision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WanderDecision.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -127,9 +142,6 @@
     <ClInclude Include="Decision.h">
       <Filter>AI</Filter>
     </ClInclude>
-    <ClInclude Include="ABDecision.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DecisionBehavior.h">
       <Filter>AI</Filter>
     </ClInclude>
@@ -139,11 +151,29 @@
     <ClInclude Include="PursueBehavior.h">
       <Filter>AI</Filter>
     </ClInclude>
-    <ClInclude Include="PursueDecision.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ComplexEnemy.h">
       <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="EvasionDecision.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="ArrivalBehavior.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="ABDecision.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="PursueDecision.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthLowDecision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SeePlayerDecision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WanderDecision.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

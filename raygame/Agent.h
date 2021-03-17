@@ -56,7 +56,7 @@ inline BehaviorType* Agent::getBehavior()
     for (int i = 0; i < m_behaviors.size(); i++)
     {
         //Attempt to cast behaviour at the current index as the given type
-        BehaviorType* behavior = dynamic_cast<BehaviourType*>(m_behaviors[i]);
+        BehaviorType* behavior = dynamic_cast<BehaviorType*>(m_behaviors[i]);
 
         //If the cast is successful return the behaviour that was found
         if (behavior)

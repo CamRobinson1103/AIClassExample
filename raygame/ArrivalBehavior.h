@@ -1,11 +1,12 @@
 #pragma once
 #include "SteeringBehavior.h"
 class Actor;
-class SeekBehavior : public SteeringBehavior
+
+class ArrivalBehavior : public SteeringBehavior
 {
 public:
-	SeekBehavior();
-	SeekBehavior(Actor* target, float seekForce = 1);
+	ArrivalBehavior();
+	ArrivalBehavior(Actor* target, float seekForce = 1);
 
 	void update(Agent* agent, float deltaTime) override;
 	MathLibrary::Vector2 calculateForce(Agent* agent) override;

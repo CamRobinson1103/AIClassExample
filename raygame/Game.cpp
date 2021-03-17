@@ -1,18 +1,29 @@
 #include "Game.h"
 #include "raylib.h"
 #include "Player.h"
+#include "Agent.h"
 #include "SeekBehavior.h"
+#include "FleeBehavior.h"
+#include "WanderBehavior.h"
+#include "PursueBehavior.h"
+#include "EvadeBehavior.h"
+#include "ArrivalBehavior.h"
+#include "SimpleEnemy.h"
 #include "DecisionBehavior.h"
 #include "ABDecision.h"
 #include "ComplexEnemy.h"
+#include "HealthLowDecision.h"
+#include "SeePlayerDecision.h"
+#include "WanderDecision.h"
 #include "PursueDecision.h"
+#include "EvasionDecision.h"
 
 bool Game::m_gameOver = false;
 Scene** Game::m_scenes = new Scene*;
 int Game::m_sceneCount = 0;
 int Game::m_currentSceneIndex = 0;
 int Game::m_screenWidth = 1024;
-int Game::m_screenHeight = 720;
+int Game::m_screenHeight = 760;
 
 Game::Game()
 {
@@ -28,28 +39,44 @@ void Game::start()
 	m_screenWidth = 1024;
 	m_screenHeight = 760;
 
-	InitWindow(m_screenWidth, m_screenHeight, "raylib [core] example - basic window");
-	m_camera->offset = { (float)m_screenWidth / 2, (float)m_screenHeight / 2 };
-	m_camera->target = { (float)m_screenWidth / 2, (float)m_screenHeight / 2 };
+	InitWindow(GetScreenWidth(), GetScreenHeight(), "raylib [core] example - basic window");
+	m_camera->offset = { (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
+	m_camera->target = { (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
 	m_camera->zoom = 1;
 
-	//Initialize agents
-	Player* player = new Player(10, 10, 5, "Images/player.png", 1, 10);
-	Agent* enemy = new Agent(20, 20, 1, "Images/enemy.png", 10, 10);
-	ComplexEnemy* complexEnemy = new ComplexEnemy(20, 20, 1, "Images/enemy.png", player );
+	// Init agents
+	Player* player = new Player(10, 10, 1, "Images/player.png", 10, 10);
+
+	// Create complex enemy
+	ComplexEnemy* complexEnemy = new ComplexEnemy(20, 20, 1, "Images/enemy.png", player, 2, 1, 1, 1);
+
+	// Add behaviours
+	PursueBehavior* pursue = new PursueBehavior(player, 1);
+	EvadeBehavior* evade = new EvadeBehavior(player, 1);
+	WanderBehavior* wander = new WanderBehavior(100, 10, 1);
+	pursue->setEnabled(false);
+	evade->setEnabled(false);
+	complexEnemy->addBehavior(pursue);
+	complexEnemy->addBehavior(evade);
+	complexEnemy->addBehavior(wander);
+
+	// Create decisions
 	PursueDecision* pursueDecision = new PursueDecision();
-	DecisionBehavior* decisionBehavior = new DecisionBehavior(pursueDecision);
+	WanderDecision* wanderDecision = new WanderDecision();
+	EvasionDecision* evadeDecision = new EvasionDecision();
+	SeePlayerDecision* seePlayerDecision = new SeePlayerDecision(pursueDecision, wanderDecision);
+	HealthLowDecision* healthLowDecision = new HealthLowDecision(evadeDecision, seePlayerDecision, 2);
 
-	complexEnemy->addBehaviour(decisionBehavior);
+	// Create decision behaviour
+	DecisionBehavior* decisionBehavior = new DecisionBehavior(healthLowDecision);
 
-	//Create a new steering behaviour and adds it to the enemy 
-	SeekBehavior* seek = new SeekBehavior(player, 10);
-	enemy->addBehaviour(seek);
+	// Add behaviour to complex enemy
+	complexEnemy->addBehavior(decisionBehavior);
 
-	//Initialize the scene
 	Scene* scene = new Scene();
 	scene->addActor(player);
-	scene->addActor(enemy);
+	scene->addActor(complexEnemy);
+
 	addScene(scene);
 	SetTargetFPS(60);
 }
