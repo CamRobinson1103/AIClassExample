@@ -31,3 +31,4 @@ void SeekBehavior::update(Agent* agent, float deltaTime)
 	//If the agent isn't null, calculate a new force and apply it to the agent
 	if (agent && getEnabled())
 		agent->addForce(calculateForce(agent));
+}

@@ -7,8 +7,8 @@ void PursueDecision::makeDecision(Agent* agent, float deltaTime)
 
 		if (enemy)
 		{
-			enemy->getPursue()->setEnabled(true);
+			/*enemy->getPursue()->setEnabled(true);
 			enemy->getWander()->setEnabled(false);
-			enemy->getEvade()->setEnabled(false);
+			enemy->getEvade()->setEnabled(false);*/
 		}
 }
