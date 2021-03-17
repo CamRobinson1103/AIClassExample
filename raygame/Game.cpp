@@ -78,8 +78,9 @@ void Game::start()
 	scene->addActor(player);
 	scene->addActor(complexEnemy);
 
-	Graph* graph = new Graph(5, 5, 5, 1);
-
+	Graph* graph = new Graph(10, 10, 10, 1);
+	graph->setWorldPostion({ 2,2 });
+	graph->BFS(0, 0, 9, 0);
 	Scene* pathFinding = new Scene();
 	pathFinding->addActor(graph);
 
